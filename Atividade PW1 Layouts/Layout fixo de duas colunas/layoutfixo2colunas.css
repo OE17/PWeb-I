@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #800080;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    max-width: 800px; /* Define largura fixa */
+    margin: 20px auto;
+}
+
+.coluna-esquerda, .coluna-direita {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    width: 50%;
+    margin: 0 10px;
+}
+
+footer {
+    background-color: #800080;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
