@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header, .footer {
+    background-color: purple;
+    color: white;
+    padding: 10px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.column {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+    background-color: lightgreen;
+    padding: 10px;
+}
+
+.footer {
+    padding: 20px;
+    font-size: 14px;
+}
