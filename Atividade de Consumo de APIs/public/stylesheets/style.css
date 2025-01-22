@@ -1,0 +1,109 @@
+body {
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding-top: 50px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.jumbotron {
+  background-color: #212121;
+  color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8);
+  margin-bottom: 40px;
+  background: linear-gradient(135deg, #121212 50%, #0a0a0a 100%);
+}
+
+.jumbotron h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+.jumbotron p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.currency-card {
+  background-color: #333333;
+  color: #f1f1f1;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.currency-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.8);
+}
+
+.currency-card h5 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ffcc00;
+  text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.2);
+}
+
+.currency-card p {
+  font-size: 1.4rem;
+  margin-top: 15px;
+}
+
+a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+button {
+  background-color: #ffcc00;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #e6b800;
+}
+
+.error-message {
+  text-align: center;
+  color: #ff6666;
+  font-size: 1.5rem;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .jumbotron h1 {
+      font-size: 2.5rem;
+  }
+  .currency-card h5 {
+      font-size: 1.4rem;
+  }
+  .currency-card p {
+      font-size: 1.2rem;
+  }
+}

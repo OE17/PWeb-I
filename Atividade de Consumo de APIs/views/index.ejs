@@ -1,0 +1,25 @@
+<div class="jumbotron">
+    <h1 class="display-4">Bitcoin Price Tracker</h1>
+    <p class="lead">Atualizado em: <%= time.updated %></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="currency-card">
+            <h5>USD</h5>
+            <p>Price: <%= bpi.USD.rate %></p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="currency-card">
+            <h5>EUR</h5>
+            <p>Price: <%= bpi.EUR.rate %></p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="currency-card">
+            <h5>GBP</h5>
+            <p>Price: <%= bpi.GBP.rate %></p>
+        </div>
+    </div>
+</div>
