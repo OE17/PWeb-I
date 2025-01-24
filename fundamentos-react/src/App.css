@@ -1,0 +1,6 @@
+.App .exercicios {
+    display: flex;
+
+    justify-content: center;
+    flex-wrap: wrap;
+}
