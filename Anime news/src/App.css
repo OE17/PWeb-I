@@ -1,0 +1,74 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.counter {
+  font-size: 2.5em;
+  margin: 2em 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 1rem;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 8px;
+}
+
+.modal input {
+  display: block;
+  margin: 1em 0;
+  padding: 0.5em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal button {
+  margin-top: 1em;
+  margin-right: 0.5em;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table th,
+.table td {
+  border: 1px solid #000000;
+  padding: 12px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #530d6e;
+  color: white;
+  font-weight: bold;
+}
+
+.table td {
+  background-color: #fbff00;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #880e0e;
+}
+
+.table tbody tr:hover {
+  background-color: #cf0000;
+}

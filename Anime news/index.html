@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>AnimeHub - Seu Portal de Animes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#6366F1',
+              secondary: '#8B5CF6',
+              background: {
+                light: '#F9FAFB',
+                dark: '#111827'
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-white transition-colors duration-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
