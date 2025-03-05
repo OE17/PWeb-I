@@ -33,12 +33,12 @@ Este protótipo foi desenvolvido para demonstrar:
 
 1. Clone este repositório:
 ```bash
-git clone https://github.com/seu-usuario/animeworld-prototype.git
+git clone https://github.com/OE17/PWeb-I.git
 ```
 
 2. Acesse a pasta do projeto:
 ```bash
-cd animeworld-prototype
+cd "Atividade N1/Protótipo"
 ```
 
 3. Instale as dependências:
@@ -108,6 +108,12 @@ O projeto utiliza uma paleta de cores moderna e vibrante:
 - 🌑 Azul noturno (#13131f) - Cor de fundo
 - ⚫ Cinza escuro (#2d2d44) - Elementos de interface
 - ⚪ Texto claro (#e1e1e6) - Texto e elementos claros
+
+## 🎨 Protótipo no Figma
+
+Este protótipo foi desenvolvido no Figma para testar e validar o conceito visual e a viabilidade do design do site. Através dele, podemos explorar diferentes abordagens de interface e interações antes da implementação.
+
+🔗 [Visualizar Protótipo no Figma](https://www.figma.com/design/9wI8d8tNsGje7qgXeothP1/Anime-site?node-id=0-1&p=f&t=ZiK2zF3d1qj7KQ8X-0)
 
 ## 📱 Responsividade
 
