@@ -113,4 +113,4 @@ Desenvolvido como parte de um exercício prático de Express.js.
 
 ---
 
-⌨️ com ❤️ por [OE17] 
+⌨️ com ❤️ por OE17
