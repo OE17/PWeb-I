@@ -1,0 +1,32 @@
+<div class="auth-section">
+  <h1><%= title %></h1>
+  <p>Crie sua conta</p>
+
+  <form class="auth-form" action="/signup" method="POST">
+    <div class="form-group">
+      <label for="name">Nome completo:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="confirm-password">Confirme a senha:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
+    </div>
+
+    <button type="submit">Criar Conta</button>
+  </form>
+
+  <p class="auth-links">
+    Já tem uma conta? <a href="/signin">Faça login</a>
+  </p>
+</div> 
