@@ -16,13 +16,13 @@ Este protótipo foi desenvolvido para demonstrar:
 
 ## 🛠️ Tecnologias Utilizadas
 
-- <img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg" height="14"/> **Node.js** - Ambiente de execução
-- <img src="https://expressjs.com/images/express-facebook-share.png" height="14"/> **Express** - Framework web
-- <img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_ejs_icon_130626.png" height="14"/> **EJS** - Template engine
-- <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" height="14"/> **Bootstrap 5** - Framework CSS
-- <img src="https://fontawesome.com/images/favicon/icon.svg" height="14"/> **Font Awesome** - Ícones
-- <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" height="14"/> **CSS3** - Estilização personalizada
-- 🔄 **LocalStorage** - Persistência de preferências do usuário
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![EJS](https://img.shields.io/badge/EJS-B4CA65?style=for-the-badge&logo=ejs&logoColor=white)](https://ejs.co/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![Font Awesome](https://img.shields.io/badge/Font_Awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white)](https://fontawesome.com/)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
+[![LocalStorage](https://img.shields.io/badge/LocalStorage-4285F4?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAQQAAAEEBqP91PgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABUSURBVCiRY/z//z8DKYCJgURAtkYWcjT9//+/gYWBgYGBkZGxgVyN/xkYGP4zMDAw/P//n4lsjf///2dkYGBgIGjd////4WJDReMwD3BiAAAAAP//GBkYGP4DAAkYA/4sDhXEAAAAAElFTkSuQmCC)](https://developer.mozilla.org/pt-BR/docs/Web/API/Window/localStorage)
 
 ## ⚙️ Pré-requisitos
 
