@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Autenticação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .toggle-form {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .toggle-form a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .toggle-form a:hover {
+            text-decoration: underline;
+        }
+        #cadastroForm {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="loginEmail">E-mail:</label>
+                <input type="email" id="loginEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="loginSenha">Senha:</label>
+                <input type="password" id="loginSenha" name="senha" required>
+            </div>
+            <button type="submit">Entrar</button>
+            <div id="loginMessage" class="message"></div>
+            <div class="toggle-form">
+                <a href="#" onclick="toggleForm('cadastro'); return false;">Não tem uma conta? Cadastre-se</a>
+            </div>
+        </form>
+
+        <form id="cadastroForm">
+            <h2>Cadastro</h2>
+            <div class="form-group">
+                <label for="cadastroEmail">E-mail:</label>
+                <input type="email" id="cadastroEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="cadastroSenha">Senha:</label>
+                <input type="password" id="cadastroSenha" name="senha" required>
+            </div>
+            <div class="form-group">
+                <label for="nivelAcesso">Nível de Acesso:</label>
+                <select id="nivelAcesso" name="nivelAcesso" required>
+                    <option value="usuario">Usuário</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+            <button type="submit">Cadastrar</button>
+            <div id="cadastroMessage" class="message"></div>
+            <div class="toggle-form">
+                <a href="#" onclick="toggleForm('login'); return false;">Já tem uma conta? Faça login</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleForm(form) {
+            const loginForm = document.getElementById('loginForm');
+            const cadastroForm = document.getElementById('cadastroForm');
+            
+            if (form === 'cadastro') {
+                loginForm.style.display = 'none';
+                cadastroForm.style.display = 'block';
+            } else {
+                loginForm.style.display = 'block';
+                cadastroForm.style.display = 'none';
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams(formData)
+                });
+                const data = await response.json();
+                const messageDiv = document.getElementById('loginMessage');
+                
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = `Login realizado com sucesso! Nível de acesso: ${data.nivelAcesso}`;
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = data.error;
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+            }
+        });
+
+        document.getElementById('cadastroForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                const response = await fetch('/cadastro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams(formData)
+                });
+                const data = await response.json();
+                const messageDiv = document.getElementById('cadastroMessage');
+                
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = data.message;
+                    e.target.reset();
+                    // Volta para o formulário de login após cadastro bem-sucedido
+                    setTimeout(() => toggleForm('login'), 2000);
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = data.error;
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+            }
+        });
+    </script>
+</body>
+</html> 
