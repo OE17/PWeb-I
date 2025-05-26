@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Autenticação</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Formulário de Login -->
+        <form id="loginForm">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="loginEmail">E-mail:</label>
+                <input type="email" id="loginEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="loginSenha">Senha:</label>
+                <div class="password-container">
+                    <input type="password" id="loginSenha" name="senha" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('loginSenha', this)">👁️</span>
+                </div>
+            </div>
+            <button type="submit">Entrar</button>
+            <div id="loginMessage" class="message"></div>
+            <div class="toggle-form">
+                <a href="#" onclick="toggleForm('cadastro'); return false;">Não tem uma conta? Cadastre-se</a>
+            </div>
+        </form>
+
+        <!-- Formulário de Cadastro -->
+        <form id="cadastroForm">
+            <h2>Cadastro</h2>
+            <div class="form-group">
+                <label for="cadastroEmail">E-mail:</label>
+                <input type="email" id="cadastroEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="cadastroSenha">Senha:</label>
+                <div class="password-container">
+                    <input type="password" id="cadastroSenha" name="senha" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('cadastroSenha', this)">👁️</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nivelAcesso">Nível de Acesso:</label>
+                <select id="nivelAcesso" name="nivelAcesso" required>
+                    <option value="usuario">Usuário</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+            <button type="submit">Cadastrar</button>
+            <div id="cadastroMessage" class="message"></div>
+            <div class="toggle-form">
+                <a href="#" onclick="toggleForm('login'); return false;">Já tem uma conta? Faça login</a>
+            </div>
+        </form>
+
+        <!-- Lista de Usuários -->
+        <div id="userList">
+            <div class="header-container">
+                <h2>Lista de Usuários</h2>
+                <button class="logout-button" onclick="logout()">Sair</button>
+            </div>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Nível de Acesso</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Formulário de Edição -->
+        <form id="editForm">
+            <h2>Editar Usuário</h2>
+            <input type="hidden" id="editUserId">
+            <div class="form-group">
+                <label for="editEmail">E-mail:</label>
+                <input type="email" id="editEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="editSenha">Nova Senha (opcional):</label>
+                <div class="password-container">
+                    <input type="password" id="editSenha" name="senha">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('editSenha', this)">👁️</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="editNivelAcesso">Nível de Acesso:</label>
+                <select id="editNivelAcesso" name="nivelAcesso" required>
+                    <option value="usuario">Usuário</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+            <button type="submit">Salvar Alterações</button>
+            <button type="button" onclick="cancelEdit()">Cancelar</button>
+        </form>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html> 
