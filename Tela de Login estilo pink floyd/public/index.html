@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink Floyd - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="galaxy-background"></div>
+    <div class="star-field">
+        <div class="star-layer" id="stars-near"></div>
+        <div class="star-layer" id="stars-mid"></div>
+        <div class="star-layer" id="stars-far"></div>
+    </div>
+    <div class="nebula"></div>
+    <div class="cosmic-dust"></div>
+    <div class="light-particles"></div>
+    
+    <div class="container">
+        <div class="prism-animation">
+            <div class="prism">
+                <div class="triangle"></div>
+                <div class="beam"></div>
+                <div class="spectrum"></div>
+            </div>
+        </div>
+        
+        <div class="login-container">
+            <h1>Pink Floyd</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="E-mail" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="senha" placeholder="Senha" required>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+            <p id="mensagem"></p>
+        </div>
+    </div>
+
+    <style>
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes glow {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.5); }
+        }
+    </style>
+    <script src="script.js"></script>
+</body>
+</html> 

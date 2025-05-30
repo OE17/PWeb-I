@@ -1,0 +1,518 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --neon-pink: #ff2975;
+    --neon-blue: #00f3ff;
+    --neon-purple: #b537f2;
+    --neon-yellow: #ffff00;
+    --deep-space: #0a001f;
+}
+
+@keyframes backgroundPulse {
+    0%, 100% { background-color: #000000; }
+    50% { background-color: #0a0a0a; }
+}
+
+@keyframes galaxyRotate {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes starExplosion {
+    0% { 
+        transform: scale(0.8);
+        opacity: 0.6;
+        filter: blur(20px) brightness(1);
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 0.8;
+        filter: blur(15px) brightness(1.5);
+    }
+    100% { 
+        transform: scale(0.8);
+        opacity: 0.6;
+        filter: blur(20px) brightness(1);
+    }
+}
+
+.galaxy-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center,
+        var(--neon-purple) 0%,
+        var(--deep-space) 40%,
+        #000 70%
+    );
+    opacity: 0.3;
+    z-index: -2;
+    animation: galaxyRotate 180s linear infinite;
+    will-change: transform;
+}
+
+.star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.star-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 4px #fff,
+        0 0 8px #fff,
+        0 0 12px var(--neon-blue);
+    will-change: transform;
+}
+
+.nebula {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 1000px;
+    height: 1000px;
+    transform: translate(-50%, -50%);
+    background: 
+        radial-gradient(circle at center,
+            rgba(255, 41, 117, 0.3) 0%,
+            rgba(181, 55, 242, 0.3) 30%,
+            rgba(0, 243, 255, 0.2) 50%,
+            transparent 70%
+        ),
+        radial-gradient(circle at 30% 40%,
+            rgba(255, 255, 0, 0.2) 0%,
+            transparent 50%
+        ),
+        radial-gradient(circle at 70% 60%,
+            rgba(0, 243, 255, 0.2) 0%,
+            transparent 50%
+        );
+    filter: blur(30px);
+    opacity: 0.8;
+    z-index: -1;
+    animation: starExplosion 10s ease-in-out infinite;
+    will-change: transform, opacity, filter;
+}
+
+.cosmic-dust {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 41, 117, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 40%, rgba(0, 243, 255, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 0, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 70% 90%, rgba(181, 55, 242, 0.1) 0%, transparent 20%);
+    z-index: -1;
+    animation: galaxyRotate 120s linear infinite reverse;
+    will-change: transform;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: transparent;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1500px;
+    overflow: hidden;
+    animation: backgroundPulse 8s infinite;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.prism-animation {
+    width: 800px;
+    height: 800px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: floatPrism 8s ease-in-out infinite;
+}
+
+.prism {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 200px auto;
+    transform-style: preserve-3d;
+    animation: rotatePrism 30s infinite linear;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 200px solid transparent;
+    border-right: 200px solid transparent;
+    border-bottom: 346.4px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    transform-style: preserve-3d;
+    animation: glowPrism 3s infinite alternate;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+}
+
+.triangle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -200px;
+    width: 400px;
+    height: 346.4px;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.15)
+    );
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: translateZ(-20px);
+}
+
+.triangle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -200px;
+    width: 400px;
+    height: 346.4px;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.2),
+        transparent 70%
+    );
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: translateZ(20px);
+    filter: blur(5px);
+}
+
+.beam {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%) rotateX(-30deg);
+    width: 60px;
+    height: 800px;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.8) 30%,
+        rgba(255, 255, 255, 0.4) 70%,
+        transparent
+    );
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    opacity: 0.7;
+    filter: blur(5px);
+    animation: pulseBeam 4s infinite alternate;
+}
+
+.spectrum {
+    position: absolute;
+    bottom: -100px;
+    left: -300px;
+    width: 1000px;
+    height: 200px;
+    background: linear-gradient(to right, 
+        rgba(255, 0, 0, 0.8),
+        rgba(255, 127, 0, 0.8),
+        rgba(255, 255, 0, 0.8),
+        rgba(0, 255, 0, 0.8),
+        rgba(0, 0, 255, 0.8),
+        rgba(75, 0, 130, 0.8),
+        rgba(148, 0, 211, 0.8)
+    );
+    transform: perspective(1000px) rotateX(30deg) translateZ(100px);
+    filter: blur(2px);
+    opacity: 0;
+    animation: 
+        showSpectrum 1s 0.5s forwards,
+        waveSpectrum 8s infinite alternate;
+    box-shadow: 
+        0 0 50px rgba(255, 0, 0, 0.5),
+        0 0 70px rgba(255, 255, 0, 0.3),
+        0 0 90px rgba(0, 0, 255, 0.3);
+}
+
+.light-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle at center,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.1) 70%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+@keyframes rotatePrism {
+    0% { transform: rotateY(0) rotateX(0) rotateZ(0); }
+    33% { transform: rotateY(120deg) rotateX(20deg) rotateZ(10deg); }
+    66% { transform: rotateY(240deg) rotateX(-20deg) rotateZ(-10deg); }
+    100% { transform: rotateY(360deg) rotateX(0) rotateZ(0); }
+}
+
+@keyframes floatPrism {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-40px) translateX(20px); }
+    50% { transform: translateY(0) translateX(-20px); }
+    75% { transform: translateY(40px) translateX(20px); }
+}
+
+@keyframes glowPrism {
+    0% { 
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    100% { 
+        filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.6));
+        border-bottom-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+@keyframes pulseBeam {
+    0% { 
+        opacity: 0.5;
+        filter: blur(5px);
+        transform: translateX(-50%) rotateX(-30deg) scaleY(1);
+    }
+    100% { 
+        opacity: 0.9;
+        filter: blur(3px);
+        transform: translateX(-50%) rotateX(-30deg) scaleY(1.2);
+    }
+}
+
+@keyframes showSpectrum {
+    to { opacity: 1; }
+}
+
+@keyframes waveSpectrum {
+    0% { 
+        transform: perspective(1000px) rotateX(30deg) translateZ(100px) scaleY(1);
+        filter: blur(2px) brightness(1);
+    }
+    50% {
+        transform: perspective(1000px) rotateX(35deg) translateZ(150px) scaleY(1.2);
+        filter: blur(1px) brightness(1.3);
+    }
+    100% {
+        transform: perspective(1000px) rotateX(30deg) translateZ(100px) scaleY(1);
+        filter: blur(2px) brightness(1);
+    }
+}
+
+.login-container {
+    background: rgba(10, 0, 31, 0.6);
+    padding: 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 
+        0 0 30px rgba(255, 41, 117, 0.2),
+        0 0 60px rgba(0, 243, 255, 0.1),
+        inset 0 0 30px rgba(181, 55, 242, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: glowContainer 3s infinite alternate;
+    will-change: transform, box-shadow;
+}
+
+@keyframes glowContainer {
+    0% {
+        box-shadow: 
+            0 0 30px rgba(255, 41, 117, 0.2),
+            0 0 60px rgba(0, 243, 255, 0.1),
+            inset 0 0 30px rgba(181, 55, 242, 0.1);
+        transform: translateZ(0) scale(1);
+    }
+    100% {
+        box-shadow: 
+            0 0 40px rgba(255, 41, 117, 0.3),
+            0 0 80px rgba(0, 243, 255, 0.2),
+            inset 0 0 40px rgba(181, 55, 242, 0.2);
+        transform: translateZ(50px) scale(1.02);
+    }
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 3em;
+    text-shadow: 
+        0 0 10px var(--neon-pink),
+        0 0 20px var(--neon-blue),
+        0 0 30px var(--neon-purple);
+    animation: titleGlow 3s infinite alternate;
+    will-change: text-shadow;
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 
+            0 0 10px var(--neon-pink),
+            0 0 20px var(--neon-blue),
+            0 0 30px var(--neon-purple);
+    }
+    100% {
+        text-shadow: 
+            0 0 20px var(--neon-pink),
+            0 0 30px var(--neon-blue),
+            0 0 40px var(--neon-purple);
+    }
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 0, 31, 0.4);
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    background: rgba(10, 0, 31, 0.6);
+    box-shadow: 
+        0 0 20px rgba(255, 41, 117, 0.2),
+        inset 0 0 10px rgba(0, 243, 255, 0.1);
+    outline: none;
+    border-color: var(--neon-pink);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg, 
+        var(--neon-pink),
+        var(--neon-purple)
+    );
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    will-change: transform, box-shadow;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+        0 5px 20px var(--neon-pink),
+        0 15px 40px var(--neon-purple);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.3),
+        transparent 70%
+    );
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+button:hover::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+#mensagem {
+    color: white;
+    text-align: center;
+    margin-top: 25px;
+    font-size: 16px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: showMessage 0.5s forwards;
+}
+
+@keyframes showMessage {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .prism-animation {
+        width: 100% !important;
+        height: 400px !important;
+    }
+
+    .login-container {
+        width: 90% !important;
+    }
+} 
