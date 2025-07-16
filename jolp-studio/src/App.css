@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.footer {
+  background-color: #19253B;
+  color: white;
+  text-align: center;
+  padding: 0.8rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+  position: relative;
+  overflow: hidden;
+  }
+
+.footer p::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #F6FF00;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.footer:hover p::before {
+  transform: translateX(0);
+}

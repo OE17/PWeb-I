@@ -1,0 +1,225 @@
+.download {
+  background-color: #151621;
+  min-height: calc(100vh - 82px);
+  padding: 3rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.download-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.download-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: stretch;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.character-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.character-image {
+  width: 300px;
+  height: auto;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateY(5deg);
+  transition: all 0.5s ease;
+  animation: float 3s ease-in-out infinite;
+  margin-top: 3rem;
+}
+
+.character-image:hover {
+  transform: perspective(1000px) rotateY(0deg);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotateY(5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateY(5deg);
+  }
+  100% {
+    transform: translateY(0px) rotateY(5deg);
+  }
+}
+
+.message-box {
+  position: relative;
+  max-width: 500px;
+  margin-left: 0;
+  margin-right: auto;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateY(-5deg);
+  transition: all 0.5s ease;
+  margin-top: -2rem;
+}
+
+.message-box:hover {
+  transform: perspective(1000px) rotateY(0deg);
+}
+
+.message-content {
+  background-color: #272336;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.message-content::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-right: 30px solid #272336;
+  border-bottom: 15px solid transparent;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.message-content p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.download-box {
+  background-color: #272336;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateY(5deg);
+  transition: all 0.5s ease;
+}
+
+.download-box:hover {
+  transform: perspective(1000px) rotateY(0deg);
+}
+
+.platform-tabs {
+  display: flex;
+  background-color: #302A43;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.platform-tab {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.platform-tab:hover {
+  background-color: rgba(246, 255, 0, 0.1);
+}
+
+.platform-tab.active {
+  color: #F6FF00;
+  background-color: rgba(246, 255, 0, 0.05);
+  box-shadow: inset 0 -3px 0 #F6FF00;
+}
+
+.download-links {
+  padding: 2rem;
+  min-height: 200px;
+}
+
+.download-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.download-link:hover {
+  background-color: rgba(246, 255, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.download-icon {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.download-link:hover .download-icon {
+  transform: translateY(3px);
+}
+
+.coming-soon {
+  font-size: 1.2rem;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .character-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .character-image {
+    width: 200px;
+  }
+  
+  .message-box {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .message-content::before {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .download {
+    padding: 2rem 1rem;
+  }
+  
+  .platform-tab {
+    font-size: 0.9rem;
+    padding: 0.8rem 0.5rem;
+  }
+  
+  .message-content p {
+    font-size: 1.1rem;
+  }
+} 
