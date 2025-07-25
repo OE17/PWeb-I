@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotWeb - Portal de Notícias</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-newspaper"></i> NotWeb</h1>
+            </div>
+            
+            <!-- Menu Hambúrguer -->
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Navegação -->
+            <nav class="nav" id="nav">
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#noticias">Notícias</a></li>
+                    <li><a href="#esportes">Esportes</a></li>
+                    <li><a href="#tecnologia">Tecnologia</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Container Principal -->
+    <div class="main-container">
+        <!-- Seção de Destaque -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h2>Últimas Notícias do Dia</h2>
+                <p>Fique por dentro de tudo que acontece no Brasil e no mundo</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://picsum.photos/1200/600?random=1" alt="Notícia Principal">
+            </div>
+        </section>
+
+        <!-- Container de Conteúdo -->
+        <div class="content-wrapper">
+            <!-- Lista de Notícias -->
+            <main class="news-section" id="noticias">
+                <h2>Últimas Notícias</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/400/250?random=2" alt="Notícia 1">
+                        </div>
+                        <div class="card-content">
+                            <h3>Inovações Tecnológicas Revolucionam o Mercado</h3>
+                            <p>Novas tecnologias estão transformando a forma como trabalhamos e vivemos, criando oportunidades únicas para o futuro.</p>
+                            <span class="date">25 de Julho, 2025</span>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/400/250?random=3" alt="Notícia 2">
+                        </div>
+                        <div class="card-content">
+                            <h3>Economia Global Apresenta Sinais de Recuperação</h3>
+                            <p>Especialistas apontam para uma retomada gradual da economia mundial após período de incertezas.</p>
+                            <span class="date">24 de Julho, 2025</span>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/400/250?random=4" alt="Notícia 3">
+                        </div>
+                        <div class="card-content">
+                            <h3>Sustentabilidade: O Futuro do Planeta</h3>
+                            <p>Iniciativas sustentáveis ganham força ao redor do mundo, promovendo um futuro mais verde e consciente.</p>
+                            <span class="date">23 de Julho, 2025</span>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/400/250?random=5" alt="Notícia 4">
+                        </div>
+                        <div class="card-content">
+                            <h3>Educação Digital Transforma o Aprendizado</h3>
+                            <p>Plataformas educacionais online revolucionam a forma como estudantes acessam conhecimento.</p>
+                            <span class="date">22 de Julho, 2025</span>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/400/250?random=6" alt="Notícia 5">
+                        </div>
+                        <div class="card-content">
+                            <h3>Ciência e Medicina Avançam Juntas</h3>
+                            <p>Novos tratamentos médicos baseados em pesquisas científicas oferecem esperança para diversas doenças.</p>
+                            <span class="date">21 de Julho, 2025</span>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/400/250?random=7" alt="Notícia 6">
+                        </div>
+                        <div class="card-content">
+                            <h3>Cultura e Arte Resistem em Tempos Modernos</h3>
+                            <p>Movimentos culturais ganham força nas redes sociais, preservando tradições e criando novas expressões artísticas.</p>
+                            <span class="date">20 de Julho, 2025</span>
+                        </div>
+                    </article>
+                </div>
+            </main>
+
+            <!-- Barra Lateral -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>Categorias</h3>
+                    <ul class="categories">
+                        <li><a href="#"><i class="fas fa-globe"></i> Mundo</a></li>
+                        <li><a href="#"><i class="fas fa-flag"></i> Brasil</a></li>
+                        <li><a href="#"><i class="fas fa-laptop"></i> Tecnologia</a></li>
+                        <li><a href="#"><i class="fas fa-futbol"></i> Esportes</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Economia</a></li>
+                        <li><a href="#"><i class="fas fa-heart"></i> Saúde</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Notícias Populares</h3>
+                    <div class="popular-news">
+                        <article class="popular-item">
+                            <img src="https://picsum.photos/80/60?random=8" alt="Popular 1">
+                            <div>
+                                <h4>IA Revoluciona Diagnósticos Médicos</h4>
+                                <span class="views"><i class="fas fa-eye"></i> 15.2k visualizações</span>
+                            </div>
+                        </article>
+                        
+                        <article class="popular-item">
+                            <img src="https://picsum.photos/80/60?random=9" alt="Popular 2">
+                            <div>
+                                <h4>Energia Renovável Bate Recordes</h4>
+                                <span class="views"><i class="fas fa-eye"></i> 12.8k visualizações</span>
+                            </div>
+                        </article>
+                        
+                        <article class="popular-item">
+                            <img src="https://picsum.photos/80/60?random=10" alt="Popular 3">
+                            <div>
+                                <h4>Descoberta Arqueológica Surpreende</h4>
+                                <span class="views"><i class="fas fa-eye"></i> 10.5k visualizações</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer" id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NotWeb</h3>
+                    <p>Seu portal de notícias confiável, sempre atualizado com as últimas informações do Brasil e do mundo.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-envelope"></i> contato@notweb.com</p>
+                    <p><i class="fas fa-phone"></i> (11) 9999-9999</p>
+                    <p><i class="fas fa-map-marker-alt"></i> São Paulo, SP</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 NotWeb. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para menu hambúrguer
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Fechar menu ao clicar em um link
+        const navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
