@@ -1,0 +1,239 @@
+.contato {
+  background-color: #151621;
+  min-height: calc(100vh - 82px);
+  padding: 4rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contato-container {
+  max-width: 800px;
+  text-align: center;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.contato-content {
+  background-color: transparent;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.titulo {
+  color: #F6FF00;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-family: 'Pixelify Sans', monospace;
+  text-transform: none;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.email-box {
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.email {
+  font-size: 1.8rem;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  color: white;
+  font-weight: normal;
+}
+
+.mensagem-adicional {
+  margin-top: 2rem;
+}
+
+.mensagem-adicional p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: white;
+  font-family: 'Pixelify Sans', monospace;
+  margin: 0;
+}
+
+/* Improved Responsive Design */
+@media (max-width: 1200px) {
+  .contato {
+    padding: 3.5rem 1.5rem;
+  }
+  
+  .contato-container {
+    max-width: 700px;
+  }
+  
+  .titulo {
+    font-size: 1.9rem;
+  }
+  
+  .email {
+    font-size: 1.7rem;
+  }
+  
+  .mensagem-adicional p {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .contato {
+    padding: 3rem 1rem;
+  }
+  
+  .titulo {
+    font-size: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .email {
+    font-size: 1.6rem;
+  }
+  
+  .mensagem-adicional p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contato {
+    padding: 2rem 1rem;
+    min-height: calc(100vh - 90px);
+  }
+
+  .contato-container {
+    padding: 1rem;
+    max-width: 600px;
+  }
+
+  .titulo {
+    font-size: 1.6rem;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+  }
+
+  .email {
+    font-size: 1.4rem;
+  }
+
+  .mensagem-adicional p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .email-box {
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .contato {
+    padding: 1.5rem 0.8rem;
+  }
+  
+  .contato-container {
+    padding: 0.8rem;
+  }
+  
+  .titulo {
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .email {
+    font-size: 1.2rem;
+  }
+  
+  .mensagem-adicional p {
+    font-size: 0.95rem;
+  }
+  
+  .contato-content {
+    padding: 1.5rem;
+  }
+  
+  .email-box {
+    margin: 1.2rem 0;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contato {
+    padding: 1rem 0.5rem;
+  }
+  
+  .titulo {
+    font-size: 1.3rem;
+  }
+  
+  .email {
+    font-size: 1.1rem;
+  }
+  
+  .mensagem-adicional p {
+    font-size: 0.9rem;
+  }
+  
+  .contato-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .titulo {
+    font-size: 1.2rem;
+  }
+  
+  .email {
+    font-size: 1rem;
+  }
+  
+  .mensagem-adicional p {
+    font-size: 0.85rem;
+  }
+  
+  .email-box {
+    margin: 1rem 0;
+    padding: 0.6rem;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+  .contato {
+    padding: 5rem 3rem;
+  }
+  
+  .contato-container {
+    max-width: 900px;
+  }
+  
+  .titulo {
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .email {
+    font-size: 2rem;
+  }
+  
+  .mensagem-adicional p {
+    font-size: 1.3rem;
+  }
+  
+  .contato-content {
+    padding: 2.5rem;
+  }
+  
+  .email-box {
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+  }
+} 
