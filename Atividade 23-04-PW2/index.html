@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Veículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .vehicle-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .vehicle-card {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #007bff;
+        }
+
+        .vehicle-card h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .vehicle-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .vehicle-info span {
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerenciador de Veículos</h1>
+
+    <!-- Formulário para adicionar veículo -->
+    <div class="container">
+        <h2>Adicionar Novo Veículo</h2>
+        <form id="vehicleForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" name="marca" required>
+                </div>
+                <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" id="modelo" name="modelo" required>
+                </div>
+                <div class="form-group">
+                    <label for="ano_fabric">Ano de Fabricação:</label>
+                    <input type="number" id="ano_fabric" name="ano_fabric" min="1900" max="2024" required>
+                </div>
+                <div class="form-group">
+                    <label for="cor">Cor:</label>
+                    <input type="text" id="cor" name="cor" required>
+                </div>
+                <div class="form-group">
+                    <label for="placa">Placa:</label>
+                    <input type="text" id="placa" name="placa" required pattern="[A-Z]{3}[0-9][A-Z0-9][0-9]{2}" placeholder="ABC1234 ou ABC1D23">
+                </div>
+            </div>
+            <button type="submit" id="submitBtn">Adicionar Veículo</button>
+            <button type="button" onclick="clearForm()">Limpar</button>
+        </form>
+    </div>
+
+    <!-- Área de mensagens -->
+    <div id="messageArea"></div>
+
+    <!-- Lista de veículos -->
+    <div class="container">
+        <h2>Lista de Veículos</h2>
+        <button onclick="loadVehicles()">Atualizar Lista</button>
+        <div id="vehicleList" class="vehicle-list">
+            <div class="loading">Carregando veículos...</div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURAÇÃO DA API =====
+        const API_BASE = 'https://mauricio.inf.br/p6/api';
+        
+        // URLs principais
+        let LIST_URL = `${API_BASE}/list/`;
+        let ADD_URL = `${API_BASE}/add/`;
+        
+        // URLs alternativas com proxy CORS (descomente se necessário)
+        // const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+        // let LIST_URL = `${CORS_PROXY}${API_BASE}/list/`;
+        // let ADD_URL = `${CORS_PROXY}${API_BASE}/add/`;
+        
+        console.log('🔧 Configuração da API:');
+        console.log('📍 URL de listagem:', LIST_URL);
+        console.log('📍 URL de adição:', ADD_URL);
+        console.log('💡 Se houver problemas de CORS, verifique o README.md para soluções');
+
+        // Função para exibir mensagens
+        function showMessage(message, type = 'success') {
+            const messageArea = document.getElementById('messageArea');
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+            
+            messageArea.innerHTML = `
+                <div class="alert ${alertClass}">
+                    ${message}
+                </div>
+            `;
+            
+            // Remove a mensagem após 5 segundos
+            setTimeout(() => {
+                messageArea.innerHTML = '';
+            }, 5000);
+        }
+
+        // Função para carregar veículos
+        async function loadVehicles() {
+            const vehicleList = document.getElementById('vehicleList');
+            vehicleList.innerHTML = '<div class="loading">Carregando veículos...</div>';
+
+            console.log('🔄 Iniciando carregamento dos veículos...');
+            console.log('📍 URL da API:', LIST_URL);
+
+            try {
+                console.log('📡 Fazendo requisição para a API...');
+                
+                const response = await fetch(LIST_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    mode: 'cors'
+                });
+
+                console.log('📬 Resposta recebida:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: Object.fromEntries(response.headers.entries())
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ Erro HTTP:', response.status, errorText);
+                    throw new Error(`Erro HTTP: ${response.status} - ${response.statusText}`);
+                }
+
+                const responseText = await response.text();
+                console.log('📄 Resposta bruta:', responseText);
+
+                let vehicles;
+                try {
+                    vehicles = JSON.parse(responseText);
+                    console.log('✅ JSON parseado:', vehicles);
+                } catch (parseError) {
+                    console.error('❌ Erro ao parsear JSON:', parseError);
+                    throw new Error('Resposta da API não é um JSON válido');
+                }
+
+                displayVehicles(vehicles);
+                
+            } catch (error) {
+                console.error('❌ Erro completo:', error);
+                vehicleList.innerHTML = `
+                    <div class="alert alert-error">
+                        <strong>Erro ao carregar veículos:</strong> ${error.message}
+                        <br><br>
+                        <strong>Detalhes técnicos:</strong>
+                        <ul>
+                            <li><strong>URL testada:</strong> ${LIST_URL}</li>
+                            <li><strong>Tipo de erro:</strong> ${error.name}</li>
+                            <li><strong>Mensagem:</strong> ${error.message}</li>
+                        </ul>
+                        <br>
+                        <strong>Possíveis soluções:</strong>
+                        <ul>
+                            <li>Verifique o console do navegador (F12) para mais detalhes</li>
+                            <li>A API pode estar temporariamente indisponível</li>
+                            <li>Problemas de CORS - tente usar um servidor local ou extensão de CORS</li>
+                            <li>Tente acessar a URL diretamente: <a href="${LIST_URL}" target="_blank">${LIST_URL}</a></li>
+                        </ul>
+                        <br>
+                        <button onclick="testAPIDirectly()">🧪 Testar API Manualmente</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Função para testar API manualmente
+        async function testAPIDirectly() {
+            console.log('🧪 Testando API manualmente...');
+            
+            try {
+                // Primeiro, tentar sem CORS
+                console.log('🔍 Teste 1: Requisição sem mode cors...');
+                const response1 = await fetch(LIST_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+                console.log('Resposta teste 1:', response1.status, response1.statusText);
+                
+                if (response1.ok) {
+                    const data = await response1.text();
+                    console.log('Dados recebidos (teste 1):', data);
+                }
+            } catch (e1) {
+                console.log('❌ Teste 1 falhou:', e1.message);
+            }
+
+            try {
+                // Segundo, tentar com mode no-cors
+                console.log('🔍 Teste 2: Requisição com mode no-cors...');
+                const response2 = await fetch(LIST_URL, {
+                    method: 'GET',
+                    mode: 'no-cors'
+                });
+                console.log('Resposta teste 2:', response2.status, response2.type);
+            } catch (e2) {
+                console.log('❌ Teste 2 falhou:', e2.message);
+            }
+
+            showMessage('Testes executados! Verifique o console (F12) para os resultados.', 'success');
+        }
+
+        // Função para exibir veículos
+        function displayVehicles(vehicles) {
+            const vehicleList = document.getElementById('vehicleList');
+            
+            console.log('🚗 Exibindo veículos:', vehicles);
+            console.log('📊 Tipo de dados:', typeof vehicles, Array.isArray(vehicles));
+
+            // Verificar se vehicles é um objeto com propriedade que contém o array
+            let vehicleArray = vehicles;
+            
+            if (vehicles && typeof vehicles === 'object' && !Array.isArray(vehicles)) {
+                // Se vehicles é um objeto, procurar por uma propriedade que contenha o array
+                const possibleKeys = ['veiculos', 'data', 'vehicles', 'lista', 'items', 'result', 'results'];
+                for (const key of possibleKeys) {
+                    if (vehicles[key] && Array.isArray(vehicles[key])) {
+                        vehicleArray = vehicles[key];
+                        console.log(`✅ Encontrado array em vehicles.${key}`);
+                        break;
+                    }
+                }
+                
+                // Se ainda não é array, mostrar a estrutura
+                if (!Array.isArray(vehicleArray)) {
+                    console.log('🔍 Estrutura do objeto recebido:', Object.keys(vehicles));
+                    vehicleList.innerHTML = `
+                        <div class="alert alert-error">
+                            <strong>Formato de dados não reconhecido</strong><br>
+                            A API retornou um objeto, mas não foi possível encontrar a lista de veículos.<br>
+                            <strong>Estrutura recebida:</strong> ${JSON.stringify(vehicles, null, 2).substring(0, 500)}...
+                            <br><br>
+                            Verifique o console para mais detalhes.
+                        </div>
+                    `;
+                    return;
+                }
+            }
+            
+            if (!Array.isArray(vehicleArray)) {
+                vehicleList.innerHTML = `
+                    <div class="alert alert-error">
+                        <strong>Formato de dados inválido</strong><br>
+                        Esperado: Array de veículos<br>
+                        Recebido: ${typeof vehicles}<br>
+                        Dados: ${JSON.stringify(vehicles).substring(0, 200)}...
+                    </div>
+                `;
+                return;
+            }
+
+            if (vehicleArray.length === 0) {
+                vehicleList.innerHTML = '<div class="alert alert-error">Nenhum veículo encontrado na base de dados.</div>';
+                return;
+            }
+
+            // Criar cards para cada veículo
+            vehicleList.innerHTML = vehicleArray.map((vehicle, index) => {
+                // Garantir que os campos existem, mesmo que vazios
+                const marca = vehicle.marca || vehicle.brand || 'N/A';
+                const modelo = vehicle.modelo || vehicle.model || 'N/A';
+                const ano = vehicle.ano_fabric || vehicle.ano || vehicle.year || 'N/A';
+                const cor = vehicle.cor || vehicle.color || vehicle.colour || 'N/A';
+                const placa = vehicle.placa || vehicle.plate || vehicle.license_plate || 'N/A';
+
+                return `
+                    <div class="vehicle-card">
+                        <h3>${marca} ${modelo}</h3>
+                        <div class="vehicle-info">
+                            <span><strong>Ano:</strong> ${ano}</span>
+                            <span><strong>Cor:</strong> ${cor}</span>
+                            <span><strong>Placa:</strong> ${placa}</span>
+                        </div>
+                        <small style="color: #666; font-size: 12px;">ID: ${vehicle.id || index + 1}</small>
+                    </div>
+                `;
+            }).join('');
+
+            console.log(`✅ Exibidos ${vehicleArray.length} veículos`);
+        }
+
+        // Função para adicionar veículo
+        async function addVehicle(vehicleData) {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Adicionando...';
+
+            console.log('➕ Iniciando adição de veículo...');
+            console.log('📍 URL da API:', ADD_URL);
+            console.log('📦 Dados do veículo:', vehicleData);
+
+            try {
+                console.log('📡 Enviando requisição POST...');
+                
+                const response = await fetch(ADD_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify(vehicleData)
+                });
+
+                console.log('📬 Resposta recebida:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: Object.fromEntries(response.headers.entries())
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ Erro HTTP:', response.status, errorText);
+                    throw new Error(`Erro HTTP: ${response.status} - ${response.statusText}\nDetalhes: ${errorText}`);
+                }
+
+                const responseText = await response.text();
+                console.log('📄 Resposta bruta:', responseText);
+
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                    console.log('✅ Resposta JSON parseada:', result);
+                } catch (parseError) {
+                    console.log('⚠️ Resposta não é JSON válido, mas requisição foi bem-sucedida');
+                    result = { message: 'Sucesso', data: responseText };
+                }
+
+                showMessage('Veículo adicionado com sucesso!', 'success');
+                clearForm();
+                
+                // Aguardar um pouco antes de recarregar para dar tempo da API processar
+                setTimeout(() => {
+                    loadVehicles();
+                }, 1000);
+                
+            } catch (error) {
+                console.error('❌ Erro completo ao adicionar:', error);
+                
+                let errorMessage = error.message;
+                if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Erro de conexão - verifique problemas de CORS ou conectividade';
+                }
+                
+                showMessage(`Erro ao adicionar veículo: ${errorMessage}`, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Adicionar Veículo';
+            }
+        }
+
+        // Função para limpar formulário
+        function clearForm() {
+            document.getElementById('vehicleForm').reset();
+        }
+
+        // Event listener para o formulário
+        document.getElementById('vehicleForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const vehicleData = {
+                marca: formData.get('marca').trim(),
+                modelo: formData.get('modelo').trim(),
+                ano_fabric: parseInt(formData.get('ano_fabric')),
+                cor: formData.get('cor').trim(),
+                placa: formData.get('placa').trim().toUpperCase()
+            };
+
+            // Validação básica
+            if (!vehicleData.marca || !vehicleData.modelo || !vehicleData.cor || !vehicleData.placa) {
+                showMessage('Por favor, preencha todos os campos.', 'error');
+                return;
+            }
+
+            if (vehicleData.ano_fabric < 1900 || vehicleData.ano_fabric > 2024) {
+                showMessage('Ano de fabricação deve estar entre 1900 e 2024.', 'error');
+                return;
+            }
+
+            // Validação da placa (formato brasileiro)
+            const placaRegex = /^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$/;
+            if (!placaRegex.test(vehicleData.placa)) {
+                showMessage('Formato de placa inválido. Use o formato ABC1234 ou ABC1D23.', 'error');
+                return;
+            }
+
+            await addVehicle(vehicleData);
+        });
+
+        // Carrega os veículos quando a página é carregada
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVehicles();
+        });
+
+        // Função para recarregar a página (útil para problemas de CORS)
+        function reloadPage() {
+            location.reload();
+        }
+
+        // Formatação automática da placa
+        document.getElementById('placa').addEventListener('input', function(e) {
+            let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            
+            if (value.length > 7) {
+                value = value.substr(0, 7);
+            }
+            
+            // Formata a placa automaticamente
+            if (value.length > 3) {
+                value = value.substr(0, 3) + value.substr(3);
+            }
+            
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
