@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Web</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>FORMULÁRIO</h1>
+        
+        <form id="formulario">
+            <div class="campo">
+                <label for="matricula">MATRÍCULA:</label>
+                <input type="text" id="matricula" name="matricula" placeholder="Digite sua matrícula">
+            </div>
+
+            <div class="campo">
+                <label for="nome">NOME:</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
+            </div>
+
+            <div class="campo">
+                <label for="cep">CEP:</label>
+                <div class="cep-container">
+                    <input type="text" id="cep" name="cep" placeholder="00000-000" maxlength="9">
+                    <button type="button" id="btnBuscarCep" class="btn-lupa">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div id="statusCep" class="status-cep"></div>
+            </div>
+
+            <div class="campo">
+                <label for="endereco">ENDEREÇO:</label>
+                <input type="text" id="endereco" name="endereco" placeholder="Endereço será preenchido automaticamente" readonly>
+            </div>
+
+            <button type="submit" class="btn-ok">OK</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
