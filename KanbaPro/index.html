@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="KanbaPro - O Kanban mais poderoso e visualmente impressionante. Gerencie seus projetos com estilo 3D e efeitos premium.">
+    <title>KanbaPro | Kanban 3D Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="kanban.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+
+<body>
+    <!-- Flashlight Effect Layer -->
+    <div id="flashlight"></div>
+    <div id="flashlight-glow"></div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient-orb orb-1"></div>
+        <div class="bg-gradient-orb orb-2"></div>
+        <div class="bg-gradient-orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Header -->
+        <header class="header-glass">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-3d">
+                        <span class="logo-icon">◆</span>
+                        <h1 class="logo-text">Kanba<span class="logo-highlight">Pro</span></h1>
+                    </div>
+                    <span class="version-badge">v3.0 Premium</span>
+                </div>
+
+                <div class="header-actions">
+                    <div class="search-container">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" placeholder="Buscar tarefas..." class="search-input" id="searchInput">
+                    </div>
+
+                    <button class="btn-clear-all" id="clearAllBtn" title="Limpar todas as tarefas">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                        </svg>
+                        <span>Limpar Tudo</span>
+                    </button>
+
+                    <button class="btn-add-task" id="addTaskBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        <span>Nova Tarefa</span>
+                    </button>
+
+                    <div class="user-avatar">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=KanbaPro" alt="User">
+                        <span class="status-online"></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card stat-todo">
+                <div class="stat-icon">📋</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="statTodo">0</span>
+                    <span class="stat-label">A Fazer</span>
+                </div>
+            </div>
+            <div class="stat-card stat-progress">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="statProgress">0</span>
+                    <span class="stat-label">Em Progresso</span>
+                </div>
+            </div>
+            <div class="stat-card stat-review">
+                <div class="stat-icon">🔍</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="statReview">0</span>
+                    <span class="stat-label">Em Revisão</span>
+                </div>
+            </div>
+            <div class="stat-card stat-done">
+                <div class="stat-icon">✅</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="statDone">0</span>
+                    <span class="stat-label">Concluídas</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kanban Board -->
+        <div class="kanban-wrapper">
+            <div class="kanban-board" id="kanbanBoard">
+                <!-- Column: To Do -->
+                <div class="kanban-column" id="todo" data-column="todo">
+                    <div class="column-header">
+                        <div class="column-title-section">
+                            <div class="column-indicator todo-indicator"></div>
+                            <h2 class="column-title">A Fazer</h2>
+                            <span class="task-count" id="todoCount">0</span>
+                        </div>
+                        <button class="column-menu-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <circle cx="12" cy="6" r="2"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <circle cx="12" cy="18" r="2"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="tasks-container" id="todoTasks"></div>
+                    <button class="add-card-btn" data-column="todo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        Adicionar Card
+                    </button>
+                </div>
+
+                <!-- Column: In Progress -->
+                <div class="kanban-column" id="progress" data-column="progress">
+                    <div class="column-header">
+                        <div class="column-title-section">
+                            <div class="column-indicator progress-indicator"></div>
+                            <h2 class="column-title">Em Progresso</h2>
+                            <span class="task-count" id="progressCount">0</span>
+                        </div>
+                        <button class="column-menu-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <circle cx="12" cy="6" r="2"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <circle cx="12" cy="18" r="2"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="tasks-container" id="progressTasks"></div>
+                    <button class="add-card-btn" data-column="progress">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        Adicionar Card
+                    </button>
+                </div>
+
+                <!-- Column: Review -->
+                <div class="kanban-column" id="review" data-column="review">
+                    <div class="column-header">
+                        <div class="column-title-section">
+                            <div class="column-indicator review-indicator"></div>
+                            <h2 class="column-title">Em Revisão</h2>
+                            <span class="task-count" id="reviewCount">0</span>
+                        </div>
+                        <button class="column-menu-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <circle cx="12" cy="6" r="2"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <circle cx="12" cy="18" r="2"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="tasks-container" id="reviewTasks"></div>
+                    <button class="add-card-btn" data-column="review">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        Adicionar Card
+                    </button>
+                </div>
+
+                <!-- Column: Done -->
+                <div class="kanban-column" id="done" data-column="done">
+                    <div class="column-header">
+                        <div class="column-title-section">
+                            <div class="column-indicator done-indicator"></div>
+                            <h2 class="column-title">Concluído</h2>
+                            <span class="task-count" id="doneCount">0</span>
+                        </div>
+                        <button class="column-menu-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <circle cx="12" cy="6" r="2"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <circle cx="12" cy="18" r="2"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="tasks-container" id="doneTasks"></div>
+                    <button class="add-card-btn" data-column="done">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        Adicionar Card
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add/Edit Task -->
+    <div class="modal-overlay" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Nova Tarefa</h3>
+                <button class="modal-close" id="closeModal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskTitle">Título da Tarefa</label>
+                    <input type="text" id="taskTitle" placeholder="Digite o título..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskDescription">Descrição</label>
+                    <textarea id="taskDescription" placeholder="Descreva a tarefa..." rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskPriority">Prioridade</label>
+                        <select id="taskPriority">
+                            <option value="low">🟢 Baixa</option>
+                            <option value="medium" selected>🟡 Média</option>
+                            <option value="high">🔴 Alta</option>
+                            <option value="urgent">🔥 Urgente</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="taskDue">Data Limite</label>
+                        <input type="date" id="taskDue">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskTags">Tags (separadas por vírgula)</label>
+                    <input type="text" id="taskTags" placeholder="design, frontend, urgente...">
+                </div>
+
+                <input type="hidden" id="taskColumn" value="todo">
+                <input type="hidden" id="taskId" value="">
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn-save">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Salvar Tarefa
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
